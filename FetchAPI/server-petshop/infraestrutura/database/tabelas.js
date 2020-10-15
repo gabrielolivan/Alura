@@ -1,0 +1,74 @@
+const SQL = require('sql-template-strings');
+const sqlite3 = require('sqlite3');
+const { open } = require('sqlite');
+class Tabelas {
+  async init() {
+    this.conexao = await open({
+    filename: './database.sqlite',
+    driver: sqlite3.Database,
+    });
+
+    this.criaClientes();
+    this.criaPets();
+    this.criaServicos();
+    this.criaAtendimentos();
+    await this.conexao.close();
+  }
+
+  criaClientes() {
+    const sql = SQL`CREATE TABLE IF NOT EXISTS Clientes (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      nome text  NOT NULL,
+      cpf text NOT NULL
+      );`;
+    this.criaTabela(sql);
+  }
+
+  criaPets() {
+    const sql = SQL`CREATE TABLE IF NOT EXISTS Pets (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      nome text,
+      donoId INTEGER,
+      tipo text,
+      observacoes text,
+      FOREIGN KEY (donoId) references Clientes(id))`;
+
+    this.criaTabela(sql);
+  }
+
+  criaServicos() {
+    const sql = SQL`CREATE TABLE IF NOT EXISTS Servicos (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      nome text,
+      preco decimal(5,2),
+      descricao text)`;
+
+    this.criaTabela(sql);
+  }
+
+  criaAtendimentos() {
+    const sql = SQL`CREATE TABLE IF NOT EXISTS Atendimentos (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      clienteId INTEGER,
+      petId INTEGER,
+      servicoId INTEGER,
+      data datetime,
+      status text,
+      observacoes text,
+      FOREIGN KEY (clienteId) references Clientes(id),
+      FOREIGN KEY (petId) references Pets(id),
+      FOREIGN KEY (servicoId) references Servicos(id))`;
+
+    this.criaTabela(sql);
+  }
+
+  async criaTabela(sql) {
+    try {
+      const retorno = await this.conexao.run(sql);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+}
+
+module.exports = new Tabelas();

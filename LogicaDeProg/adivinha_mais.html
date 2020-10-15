@@ -1,0 +1,65 @@
+<meta charset="UTF-8">
+
+<p>Digite um numero entre 0 e 10</p>
+<input type="text">
+<button>Compare com o meu segredo</button>
+
+<script>
+
+    function sorteia() {
+        return Math.round(Math.random() * 10);
+    }
+
+    function sorteiaNumeros(value) {
+        var segredos = [];
+        var numero = 1;
+        while(numero <= value){
+
+            var numeroAleatorio = sorteia();
+            var achou = false;
+
+            for(var i = 0; i < segredos.length; i++){
+                if(numeroAleatorio == segredos[i]){
+                    achou = true;
+                    break;
+                }
+            }
+
+            if(achou == false) {
+                
+                segredos.push(numeroAleatorio);
+                numero++;
+        
+            }
+        }
+    }
+
+
+    var segredos = sorteiaNumeros(5);
+
+    var input = document.querySelector('input');
+    input.focus();
+    var botao = document.querySelector('button');
+
+    function verifica() {
+
+        var achou = false;
+        for(var i = 0; i <= segredos.length; i++){
+            if(input.value == segredos[i]){
+                alert('Você acertou');
+                achou = true;
+                break;
+            }
+        };
+
+        if(achou == false){
+            alert('Você Errou');
+        }
+        
+        input.value = "";
+        input.focus();
+    }
+
+    botao.onclick = verifica;
+
+</script>
