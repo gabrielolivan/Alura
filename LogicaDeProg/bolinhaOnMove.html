@@ -1,0 +1,39 @@
+<canvas width="600" height="400"></canvas>
+<br>Escolha uma cor <input type="color">
+<script>
+
+    var canva = document.querySelector('canvas')
+    var pincel = canva.getContext('2d')
+    var paleta = document.querySelector('input')
+    var pincelAtivo = false
+
+
+    pincel.fillStyle = 'grey'
+    pincel.fillRect(0, 0, 600, 400)
+
+    
+
+    canva.onmousemove = function (evento) {
+
+        if(pincelAtivo){
+            var x = evento.pageX - canva.offsetLeft
+            var y = evento.pageY - canva.offsetTop
+            pincel.fillStyle = paleta.value
+            pincel.beginPath()
+            pincel.arc(x, y, 10, 0, 2*3.14)
+            pincel.fill()
+        }
+        
+    }
+
+    canva.onmousedown = function () {
+        pincelAtivo = true
+    }
+
+    canva.onmouseup = function () {
+        pincelAtivo = false
+    }
+
+
+
+</script>

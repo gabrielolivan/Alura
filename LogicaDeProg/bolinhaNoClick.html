@@ -6,22 +6,26 @@
     var cores = ['blue','red','green']
     var corSelecionada = 'blue'
     var i = 0
-
+    var tamanho = 10;
     pincel.fillStyle = 'grey'
     pincel.fillRect(0,0,600,400)
 
     function desenhaCirculo(evento) {
         
-        var x = evento.pageX - tela.offsetLeft;
-        var y = evento.pageY - tela.offsetTop;
+        var x = evento.pageX - tela.offsetLeft
+        var y = evento.pageY - tela.offsetTop
 
-        pincel.fillStyle = corSelecionada;
-        pincel.beginPath();
-        if(evento.shiftKey){
-            pincel.arc(x, y, 30, 0, 2*3.14);
-        } else {
-            pincel.arc(x, y, 10, 0, 2*3.14);
+        pincel.fillStyle = corSelecionada
+        pincel.beginPath()
+        
+        if(tamanho <= 40 && tamanho >= 10) {
+            if(evento.shiftKey) tamanho+=10
+            if(evento.altKey) tamanho-=5
         }
+        
+        
+        pincel.arc(x, y, tamanho, 0, 2*3.14)
+        
         pincel.fill()
 
     }
