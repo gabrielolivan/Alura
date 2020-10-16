@@ -1,0 +1,67 @@
+<canvas width="800" height="600"></canvas>
+<script>
+
+    var tela = document.querySelector('canvas')
+    var pincel = tela.getContext('2d')
+    var velocidade = 600
+
+    pincel.fillStyle = 'lightgray'
+    pincel.fillRect(0, 0, tela.width, tela.height)
+
+    var raio = 10
+    var xAleatorio
+    var yAleatorio
+
+    function desenhaCirculo(x, y, raio, cor) {
+        pincel.fillStyle = cor
+        pincel.beginPath()
+        pincel.arc(x, y, raio, 0, x*Math.PI)
+        pincel.fill()
+    }
+
+    function limpaTela() {
+        pincel.fillStyle = 'lightgray'
+        pincel.fillRect(0, 0, tela.width, tela.height);
+    }
+    function desenhaAlvo(x, y) {
+
+            
+        desenhaCirculo(x, y, raio + 20, 'red')
+        desenhaCirculo(x, y, raio + 10, 'white')
+        desenhaCirculo(x, y, raio, 'red')
+
+    }
+
+    function sorteiaPosicao(maximo) {
+        return Math.floor(Math.random() * maximo)
+    }
+
+    function atualizaTela() {
+        limpaTela()
+        xAleatorio = sorteiaPosicao(tela.width)
+        yAleatorio = sorteiaPosicao(tela.height)
+        desenhaAlvo(xAleatorio, yAleatorio)
+    }
+
+    setInterval(atualizaTela,velocidade)
+
+    function dispara(evento) {
+
+    var x = evento.pageX - tela.offsetLeft;
+    var y = evento.pageY - tela.offsetTop;
+
+    if((x > xAleatorio - raio)
+    && (x < xAleatorio + raio)
+    && (y > yAleatorio - raio)
+    && (y < yAleatorio + raio)) {
+
+        alert('Acertou!');
+
+    }
+
+
+}
+
+    tela.onclick = dispara
+
+</script>
