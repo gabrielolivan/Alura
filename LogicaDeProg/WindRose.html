@@ -1,0 +1,276 @@
+<canvas width="200" height="200"></canvas>
+<script>
+    var direcao = 300;
+
+    function clearStatus() {
+        var canva = document.querySelector('canvas');
+        var pincel = canva.getContext('2d');
+        var width = canva.width;
+        var height = canva.heigth;
+        var centro = width/2;
+        var raio = width/5;
+        var raioMenor = width/120;
+        var tamanhoEixoSecundario = width/20;
+        var tamanhoEixoPrincipal = width/7;
+        var norte = "N";
+        var nordeste = "NE";
+        var leste = "L";
+        var sudeste = "SE";
+        var sul = "S";
+        var sudoeste = "SO";
+        var oeste = "O";
+        var noroeste = "NO";
+        
+
+        var corPrimaria = 'white';
+        var corBorda = 'black';
+        var distTexto = width/30;
+        var tamanhoFonte = width/40;
+        var fontEixoSecundario = tamanhoFonte + 'px Georgia';
+        var fontEixoPrimario = distTexto + 'px Georgia';
+
+        pincel.font = fontEixoSecundario;
+        pincel.fillStyle='white';
+        
+        pincel.fillStyle = '#313131';
+        pincel.fillRect(0,0,600,600);
+
+        
+        pincel.fillStyle = 'white';
+        pincel.beginPath();
+        pincel.arc(centro, centro, raio, 0, 2*Math.PI);
+        pincel.strokeStyle = 'black';
+        pincel.fill();
+        pincel.lineWidth = 5;
+        pincel.stroke();
+        
+        
+        pincel.lineWidth = 2;
+        pincel.beginPath();
+        pincel.moveTo((centro-raio+tamanhoEixoSecundario),(centro-raio+tamanhoEixoSecundario));
+        pincel.lineTo(centro-raio/4,centro);
+        pincel.lineTo(centro,centro);
+        pincel.lineTo(centro,centro-raio/4);
+        pincel.lineTo((centro-raio+tamanhoEixoSecundario),(centro-raio+tamanhoEixoSecundario));
+        pincel.fill();
+        pincel.stroke();
+        pincel.fillText(noroeste,(centro-raio+tamanhoEixoSecundario-0.8*distTexto),(centro-raio+tamanhoEixoSecundario-0.6*distTexto)); 
+
+        
+        pincel.beginPath();
+        pincel.moveTo((centro+raio-tamanhoEixoSecundario),(centro-raio+tamanhoEixoSecundario));
+        pincel.lineTo(centro+raio/4,centro);
+        pincel.lineTo(centro,centro);
+        pincel.lineTo(centro,centro-raio/4);
+        pincel.lineTo((centro+raio-tamanhoEixoSecundario),(centro-raio+tamanhoEixoSecundario));
+        pincel.fill();
+        pincel.stroke();
+        pincel.fillText(nordeste,(centro+raio-tamanhoEixoSecundario+0.4*distTexto),(centro-raio+tamanhoEixoSecundario-0.6*distTexto)); 
+
+       
+        pincel.beginPath();
+        pincel.moveTo((centro+raio-tamanhoEixoSecundario),(centro+raio-tamanhoEixoSecundario));
+        pincel.lineTo(centro+raio/4,centro);
+        pincel.lineTo(centro,centro);
+        pincel.lineTo(centro,centro+raio/4);
+        pincel.lineTo((centro+raio-tamanhoEixoSecundario),(centro+raio-tamanhoEixoSecundario));
+        pincel.fill();
+        pincel.stroke();
+        pincel.fillText(sudeste,(centro+raio-tamanhoEixoSecundario+0.2*distTexto),(centro+raio-tamanhoEixoSecundario+0.8*distTexto)); 
+
+        
+        pincel.beginPath();
+        pincel.moveTo((centro-raio+tamanhoEixoSecundario),(centro+raio-tamanhoEixoSecundario));
+        pincel.lineTo(centro-raio/4,centro);
+        pincel.lineTo(centro,centro);
+        pincel.lineTo(centro,centro+raio/4);
+        pincel.lineTo((centro-raio+tamanhoEixoSecundario),(centro+raio-tamanhoEixoSecundario));
+        pincel.fill();
+        pincel.stroke();
+        pincel.fillText(sudoeste,(centro-raio+tamanhoEixoSecundario-0.8*distTexto),(centro+raio-tamanhoEixoSecundario+0.8*distTexto)); 
+        
+        
+        pincel.beginPath();
+        pincel.moveTo((centro-raio-tamanhoEixoPrincipal),(centro));
+        pincel.lineTo(centro-raio/4+raioMenor,centro-raio/4+raioMenor);
+        pincel.lineTo((centro),(centro-raio-tamanhoEixoPrincipal));
+        pincel.lineTo(centro+raio/4-raioMenor,centro-raio/4+raioMenor);
+        pincel.lineTo((centro+raio+tamanhoEixoPrincipal),(centro));
+        pincel.lineTo(centro+raio/4-raioMenor,centro+raio/4-raioMenor);
+        pincel.lineTo((centro),(centro+raio+tamanhoEixoPrincipal));
+        pincel.lineTo(centro-raio/4+raioMenor,centro+raio/4-raioMenor);
+        pincel.lineTo((centro-raio-tamanhoEixoPrincipal),(centro));
+        pincel.fill();
+        pincel.stroke();
+        
+        pincel.font = fontEixoPrimario;
+        pincel.fillText(norte,(centro-distTexto/2),(centro-raio-tamanhoEixoPrincipal-distTexto));
+        pincel.fillText(leste,(centro+raio+tamanhoEixoPrincipal+0.8*distTexto),(centro+distTexto/2));
+        pincel.fillText(sul,(centro-distTexto/2),(centro+raio+tamanhoEixoPrincipal+1.5*distTexto));
+        pincel.fillText(oeste,(centro-raio-tamanhoEixoPrincipal-1.2*distTexto),(centro+distTexto/2));
+
+        
+        pincel.lineWidth = 1;
+        pincel.beginPath();
+        pincel.moveTo(centro,centro);
+        pincel.lineTo((centro),(centro-raio-tamanhoEixoPrincipal));
+        pincel.stroke();
+
+        pincel.beginPath();
+        pincel.moveTo(centro,centro);
+        pincel.lineTo((centro+raio+tamanhoEixoPrincipal),(centro));
+        pincel.stroke();
+
+        pincel.beginPath();
+        pincel.moveTo(centro,centro);
+        pincel.lineTo((centro),(centro+raio+tamanhoEixoPrincipal));
+        pincel.stroke();
+
+        pincel.beginPath();
+        pincel.moveTo(centro,centro);
+        pincel.lineTo((centro-raio-tamanhoEixoPrincipal),(centro));
+        pincel.stroke();
+
+        pincel.beginPath();
+        pincel.moveTo(centro,centro);
+        pincel.lineTo((centro-raio+tamanhoEixoSecundario),(centro-raio+tamanhoEixoSecundario));
+        pincel.stroke();
+
+        pincel.beginPath();
+        pincel.moveTo(centro,centro);
+        pincel.lineTo((centro+raio-tamanhoEixoSecundario),(centro-raio+tamanhoEixoSecundario));
+        pincel.stroke();
+
+        pincel.beginPath();
+        pincel.moveTo(centro,centro);
+        pincel.lineTo((centro+raio-tamanhoEixoSecundario),(centro+raio-tamanhoEixoSecundario));
+        pincel.stroke();
+
+        pincel.beginPath();
+        pincel.moveTo(centro,centro);
+        pincel.lineTo((centro-raio+tamanhoEixoSecundario),(centro+raio-tamanhoEixoSecundario));
+        pincel.stroke();
+    };
+    
+    function WV(dir) {
+        var canva = document.querySelector('canvas');
+        var pincel = canva.getContext('2d');
+        var width = canva.width;
+        var height = canva.heigth;
+        var centro = width/2;
+        var raio = width/5;
+        var raioMenor = width/120;
+        var tamanhoEixoSecundario = width/20;
+        var tamanhoEixoPrincipal = width/6;
+        var distTexto = width/30;
+        var fontEixoSecundario = '15px Georgia';
+        var fontEixoPrimario = '20px Georgia';
+
+        if((337.5 <= dir) && (dir <= 360) || (0 <= dir) && (dir <= 22.5)){
+            clearStatus();
+            pincel.fillStyle = 'black';
+            pincel.lineWidth = 2;
+            pincel.beginPath();
+            pincel.moveTo((centro),(centro-raio-tamanhoEixoPrincipal));
+            pincel.lineTo(centro-raio/4+raioMenor,centro-raio/4+raioMenor);
+            pincel.lineTo(centro,centro);
+            pincel.lineTo(centro+raio/4-raioMenor,centro-raio/4+raioMenor);
+            pincel.lineTo((centro),(centro-raio-tamanhoEixoPrincipal));
+            pincel.fill();
+            pincel.stroke();          
+        } else if((22.5 < dir) && (dir < 67.5)){
+            clearStatus();
+            pincel.fillStyle = 'black';
+            pincel.lineWidth = 2;
+            pincel.moveTo((centro+raio-tamanhoEixoSecundario),(centro-raio+tamanhoEixoSecundario));
+            pincel.lineTo(centro+raio/4,centro);
+            pincel.lineTo(centro,centro);
+            pincel.lineTo(centro,centro-raio/4);
+            pincel.lineTo((centro+raio-tamanhoEixoSecundario),(centro-raio+tamanhoEixoSecundario));
+            pincel.fill();
+            pincel.stroke();  
+        } else if((67.5 <= dir) && (dir <= 112.5)){
+            clearStatus();
+            pincel.fillStyle = 'black';
+            pincel.lineWidth = 2;
+            pincel.beginPath();
+            pincel.moveTo((centro+raio+tamanhoEixoPrincipal),(centro));
+            pincel.lineTo(centro+raio/4-raioMenor,centro-raio/4+raioMenor);
+            pincel.lineTo(centro,centro);
+            pincel.lineTo(centro+raio/4-raioMenor,centro+raio/4-raioMenor);
+            pincel.lineTo((centro+raio+tamanhoEixoPrincipal),(centro));
+            pincel.fill();
+            pincel.stroke();  
+        } else if((112.5 < dir) && (dir < 157.5)){
+            clearStatus();
+            pincel.fillStyle = 'black';
+            pincel.lineWidth = 2;
+            pincel.beginPath();
+            pincel.moveTo((centro+raio-tamanhoEixoSecundario),(centro+raio-tamanhoEixoSecundario));
+            pincel.lineTo(centro+raio/4,centro);
+            pincel.lineTo(centro,centro);
+            pincel.lineTo(centro,centro+raio/4);
+            pincel.lineTo((centro+raio-tamanhoEixoSecundario),(centro+raio-tamanhoEixoSecundario));
+            pincel.fill();
+            pincel.stroke();  
+        } else if((157.5 <= dir) && (dir <= 202.5)){
+            clearStatus();
+            pincel.fillStyle = 'black';
+            pincel.lineWidth = 2;
+            pincel.beginPath();
+            pincel.moveTo((centro),(centro+raio+tamanhoEixoPrincipal));
+            pincel.lineTo(centro+raio/4-raioMenor,centro+raio/4-raioMenor);
+            pincel.lineTo(centro,centro);
+            pincel.lineTo(centro-raio/4+raioMenor,centro+raio/4-raioMenor);
+            pincel.lineTo((centro),(centro+raio+tamanhoEixoPrincipal));
+            pincel.fill();
+            pincel.stroke();  
+        } else if((202.5 < dir) && (dir < 247.5)){
+            clearStatus();
+            pincel.fillStyle = 'black';
+            pincel.lineWidth = 2;
+            pincel.beginPath();
+            pincel.moveTo((centro-raio+tamanhoEixoSecundario),(centro+raio-tamanhoEixoSecundario));
+            pincel.lineTo(centro-raio/4,centro);
+            pincel.lineTo(centro,centro);
+            pincel.lineTo(centro,centro+raio/4);
+            pincel.lineTo((centro-raio+tamanhoEixoSecundario),(centro+raio-tamanhoEixoSecundario));
+            pincel.fill();
+            pincel.stroke();  
+        } else if((247.5 <= dir) && (dir <= 292.5)){
+            clearStatus();
+            pincel.fillStyle = 'black';
+            pincel.lineWidth = 2;
+            pincel.beginPath();
+            pincel.moveTo((centro-raio-tamanhoEixoPrincipal),(centro));
+            pincel.lineTo(centro-raio/4+raioMenor,centro+raio/4-raioMenor);
+            pincel.lineTo(centro,centro);
+            pincel.lineTo(centro-raio/4+raioMenor,centro-raio/4+raioMenor);
+            pincel.lineTo((centro-raio-tamanhoEixoPrincipal),(centro));
+            pincel.fill();
+            pincel.stroke();  
+        } else if((292.5 < dir) && (dir < 337.5)){
+            clearStatus();
+            pincel.fillStyle = 'black';
+            pincel.lineWidth = 2;
+            pincel.beginPath();
+            pincel.moveTo((centro-raio+tamanhoEixoSecundario),(centro-raio+tamanhoEixoSecundario));
+            pincel.lineTo(centro-raio/4,centro);
+            pincel.lineTo(centro,centro);
+            pincel.lineTo(centro,centro-raio/4);
+            pincel.lineTo((centro-raio+tamanhoEixoSecundario),(centro-raio+tamanhoEixoSecundario));
+            pincel.fill();
+            pincel.stroke();  
+
+            
+        } else {
+            console.log('Angulo inexistente');
+        };
+        pincel.font=tamanhoEixoPrincipal;
+        pincel.fillStyle='white';
+        pincel.fillText(dir + 'º', centro-0.6*tamanhoEixoSecundario, centro+2*raio+tamanhoEixoSecundario);
+    };
+
+    clearStatus();
+    WV(direcao);
+</script>
