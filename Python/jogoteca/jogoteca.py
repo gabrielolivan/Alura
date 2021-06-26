@@ -1,23 +1,13 @@
-from flask import Flask, render_template
+from flask import Flask
+from flask_mysqldb import MySQL
 
 app = Flask(__name__)
+app.config.from_pyfile('config.py')
 
+db = MySQL(app)
 
-class Jogo:
-    def __init__(self, nome, categoria, console):
-        self.nome = nome
-        self.categoria = categoria
-        self.console = console
+from views import *
 
-
-@app.route('/inicio')
-def ola():
-    jogo1 = Jogo('Super Mario', 'Ação', 'SNES')
-    jogo2 = Jogo('Pokemon Gold', 'RPG', 'GBA')
-    jogo3 = Jogo('Mortal Kombat', 'Luta', 'SNES')
-    lista = [jogo1, jogo2, jogo3]
-    return render_template('lista.html', titulo='jogos', jogos=lista)
-
-
-# app.run(host='0.0.0.0', port=8080)
-app.run()
+if __name__ == '__main__':
+    # app.run(host='0.0.0.0', port=3036)
+    app.run(host='127.0.0.1', port=3036,  debug=True)
