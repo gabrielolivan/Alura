@@ -1,10 +1,11 @@
 import MySQLdb
+
 print('Conectando...')
 conn = MySQLdb.connect(user='root', passwd='admin', host='127.0.0.1', port=3306)
 
 # Descomente se quiser desfazer o banco...
-conn.cursor().execute("DROP DATABASE IF EXISTS `jogoteca`;")
-conn.commit()
+# conn.cursor().execute("DROP DATABASE IF EXISTS `jogoteca`;")
+# conn.commit()
 
 criar_tabelas = '''CREATE DATABASE `jogoteca` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
     USE `jogoteca`;
