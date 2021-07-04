@@ -1,7 +1,8 @@
-from cpf_cnpj import Documento
+from cep import BuscaEndereco
 
-cnpj = '35379838000112'
-cpf = '05363439930'
-objeto_cpf = Documento.cria_documento(cpf)
+cep = 88040250
+objeto_cep = BuscaEndereco(cep)
 
-print(objeto_cpf)
+bairro, cidade, uf = objeto_cep.acessa_via_cep()
+print(bairro, cidade, uf)
+
