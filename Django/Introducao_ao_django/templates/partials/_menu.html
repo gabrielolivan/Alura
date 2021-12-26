@@ -58,10 +58,24 @@
                         <div class="classynav">
                             <ul>
                                 {% if user.is_authenticated %}
+<<<<<<< HEAD
                                     <li><a href="{% url 'dashboard' %}">Minhas receitas</a></li>
                                     <li><a href="{% url 'cria_receita' %}">Criar receita</a></li>
                                     <li><a href="{% url 'logout' %}">Logout</a></li>
                                 {% else %}
+=======
+                                    <li><a href="{% url 'index' %}">Página inicial</a></li>
+                                    <li><a href="{% url 'dashboard' %}">Minhas receitas</a></li>
+                                    <li><a href="{% url 'cria_receita' %}">Criar receita</a></li>
+                                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                                    
+                                    {% if user.is_superuser %}
+                                    <li><a href="{% url 'admin:index' %}">Admin</a></li>
+                                    {% endif %}
+                                        
+                                {% else %}
+                                    <li><a href="{% url 'index' %}">Página inicial</a></li>
+>>>>>>> 395f87bd2f0765e669f4fe60f31b2129718f10c8
                                     <li><a href="{% url 'cadastro' %}">Cadastro</a></li>
                                     <li><a href="{% url 'login' %}">Login</a></li>
                                 {% endif %}    
