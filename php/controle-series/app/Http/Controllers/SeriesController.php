@@ -9,9 +9,15 @@ use App\Models\Temporada;
 use App\Services\CriadorDeSerie;
 use App\Services\RemovedorDeSerie;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SeriesController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     public function index (Request $request) 
     {
@@ -61,5 +67,13 @@ class SeriesController extends Controller
                 "Série $nomeSerie removida com sucesso");
 
         return redirect()->route('listar_series');
+    }
+
+    public function editaNome(Request $request)
+    {
+        $novoNome = $request->nome;
+        $serie = Serie::find($request->id);
+        $serie->nome = $novoNome;
+        $serie->save();
     }
 }
