@@ -14,6 +14,16 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </head>
 <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-2 d-flex justify-content-between">
+        <a href="{{ route('listar_series') }}" class="navbar-brand h1">Home</a>
+        @auth
+        <a href="/sair" class="text-danger">Sair</a>            
+        @endauth
+        @guest
+        <a href="/entrar" class="text-danger">Entrar</a>              
+        @endguest
+    </nav>
+
     <div class="container">
         <div class="jumbotron">
             <h1>@yield('cabecalho')</h1>
